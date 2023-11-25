@@ -1,29 +1,32 @@
-const {Sequelize, DataTypes} = require('sequelize');
+const { DataTypes} = require('sequelize');
 
 const sequelize = require("../db/db.config");
 
 const User = sequelize.define("User", {
-    // id:{
-    //     type: DataTypes.INTEGER,
-    //     primaryKey: true
-    // },
     first_name: {
         type: DataTypes.STRING,
         required: true,
-        unique: true,
         allowNull: false,
         validate: {
             isAlpha: true,
         }
     }, last_name: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        validate: {
+            isAlpha: true,
+        }
     }, email: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false
     }, phone: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            len: [4, 11],
+            isNumeric: true
+        }
     }, password: {
         type: DataTypes.STRING,
         allowNull: false
@@ -31,9 +34,10 @@ const User = sequelize.define("User", {
     }
 }, {
     freezeTableName: true,
-    timestamps: false, // schema: "user", // Replace 'your_schema' with the actual schema name
+    timestamps: false,
 });
 
-sequelize.sync({force: true})
+
+sequelize.sync()
 module.exports = User
-// return User.schema("public");
+

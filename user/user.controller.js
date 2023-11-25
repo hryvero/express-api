@@ -1,44 +1,58 @@
- createUser=  async(req, res, next) => {
-    try {
-        const hashPassword = await authService.hashPassword(req.body.password);
-        const createUser = await userModel.create({
-            ...req.body,
-            password: hashPassword,
-        });
+const bcrypt = require('bcrypt')
+const socketIO = require('socket.io');
+const {server} = require('../app');
+const io = socketIO('http://localhost:3000');
+const User = require("../models/user.model");
 
-        res.json(createUser);
-    } catch (e) {
-        next(e);
-    }
+createUser = async (req, res) => {
+  try {
+    const hashPassword = await bcrypt.hash(req.body.password, 10)
+    const user = await User.create({...req.body, password: hashPassword});
+    res.json(user).status(201)
+  } catch (error) {
+    res.status(400).json(error.message)
+  }
 },
 
-    getUserById=  async (req, res, next) => {
+  getUserById = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const getUser = await userModel.findOne(
-            { _id: userId },
-            { $set: req.body }
-        );
-        res.json(getUser);
-    } catch (e) {
-        next(e);
+      const {id} = req.params;
+      const getUser = await User.findByPk(id);
+      res.json(getUser);
+    } catch (error) {
+      res.status(400).json(error.message)
     }
-},
-    updateUser= async (req, res, next) => {
-     try {
-         const {userId} = req.params;
-         const updateUser = await userModel.updateOne(
-             {_id: userId},
-             {$set: req.body}
-         );
+  },
+  updateUser = async (req, res) => {
+    try {
+      const data = req.body
+      const id = req.params.id;
 
-         res.json(updateUser);
-     } catch (e) {
-         next(e);
-     }
- }
- module.exports={
-     createUser,
-     getUserById,
-     updateUser
- }
+
+
+        io.emit('notification', {id, message: 'User updated!'});
+
+
+      const updatedUser = await User.update(data,
+        {
+          returning: true,
+          where: {id},
+        },
+      ).then((result) => {
+
+        res.json(result[1][0].dataValues)
+        console.log(result[1][0].dataValues)
+      }).catch((error) => {
+        console.log(error)
+      });
+
+      res.json(updatedUser);
+    } catch (error) {
+      res.status(400).json(error.message)
+    }
+  }
+module.exports = {
+  createUser,
+  getUserById,
+  updateUser
+}

@@ -1,10 +1,17 @@
-const { Router } = require("express");
+const {Router} = require("express");
 
+const {newUserValidator, updateUserValidator} = require('./user.middleware')
+const {createUser, getUserById, updateUser} = require('./user.controller')
 
 const userRouter = Router();
 
-userRouter.put('/users/:id')
+userRouter.post('/',
+    newUserValidator,
+    createUser
+)
 
-userRouter.get('/users/:id')
+userRouter.get('/:id', getUserById)
 
-module.exports=userRouter;
+userRouter.put('/:id', updateUserValidator, updateUser)
+
+module.exports = userRouter;
