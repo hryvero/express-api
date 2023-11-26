@@ -5,12 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="981ca2b8-1669-4246-a001-74d8bd96af56" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/auth/auth.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/auth.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/auth.validator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/constants/joi.errors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/auth/auth.middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/auth/auth.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/regexp.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/regexp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/user.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/user.middleware.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/user.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/user.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user.validator.js" beforeDir="false" afterPath="$PROJECT_DIR$/user/user.validator.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700833574875</updated>
       <workItem from="1700833575878" duration="25026000" />
-      <workItem from="1700941679553" duration="17333000" />
+      <workItem from="1700941679553" duration="29885000" />
     </task>
     <servers />
   </component>

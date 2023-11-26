@@ -1,5 +1,4 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const http = require('http')
 const socketIO = require('socket.io')
 const dotenv = require("dotenv")
@@ -37,7 +36,6 @@ sequalize.authenticate().then(() => {
 });
 
 app.use("/users", (req, res, next) => {
-  console.log("io", req.io)
   req.io = io;
   next();
 }, userRouter);

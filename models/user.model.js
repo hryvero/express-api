@@ -8,12 +8,14 @@ const User = sequelize.define("User", {
         required: true,
         allowNull: false,
         validate: {
+            len: [2, 20],
             isAlpha: true,
         }
     }, last_name: {
         type: DataTypes.STRING,
         allowNull: true,
         validate: {
+            len: [2, 20],
             isAlpha: true,
         }
     }, email: {
