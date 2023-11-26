@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
-const socketIO = require('socket.io');
-const {server} = require('../app');
-const io = socketIO('http://localhost:3000');
+// const socketIO = require('socket.io');
+// const {server} = require('../app');
+// const io = socketIO('http://localhost:3000');
 const User = require("../models/user.model");
 
 createUser = async (req, res) => {
@@ -23,14 +23,17 @@ createUser = async (req, res) => {
       res.status(400).json(error.message)
     }
   },
-  updateUser = async (req, res) => {
+
+sendMessage = (req, res) => {
+  const { id, message } = req.socketData;
+  req.io.emit('userUpdated', { id, message });
+  res.status(200).json({ message: 'User updated successfully' });
+};
+
+  updateUser = async (req, res, next) => {
     try {
       const data = req.body
       const id = req.params.id;
-
-
-
-        io.emit('notification', {id, message: 'User updated!'});
 
 
       const updatedUser = await User.update(data,
@@ -39,14 +42,16 @@ createUser = async (req, res) => {
           where: {id},
         },
       ).then((result) => {
+        req.socketData = { id, message: 'User updated!' };
+        next();
+        // res.json(result[1][0].dataValues)
 
-        res.json(result[1][0].dataValues)
-        console.log(result[1][0].dataValues)
       }).catch((error) => {
         console.log(error)
       });
 
-      res.json(updatedUser);
+
+      // res.json(updatedUser);
     } catch (error) {
       res.status(400).json(error.message)
     }
@@ -54,5 +59,6 @@ createUser = async (req, res) => {
 module.exports = {
   createUser,
   getUserById,
+  sendMessage,
   updateUser
 }
