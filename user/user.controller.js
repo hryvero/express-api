@@ -34,7 +34,7 @@ const updateUser = async (req, res, next) => {
 
 		if (req.body.password) {
 			const updatedPassword = await hashPassword(req.body.password, 10)
-			console.log(updatedPassword)
+
 			data = { ...req.body, password: updatedPassword }
 		}
 
