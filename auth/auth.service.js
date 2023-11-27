@@ -1,34 +1,34 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-// const dotenv = require("dotenv")
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
-const ACCESS_TOKEN_SECRET = process.env.JWT_SECRET || ""
+
+const ACCESS_TOKEN_SECRET = process.env.JWT_SECRET || ''
 
 async function comparePasswords(password, hashPassword) {
-  const isPasswordSame = await bcrypt.compare(password, hashPassword);
+	const isPasswordSame = await bcrypt.compare(password, hashPassword)
 
-  if (!isPasswordSame) {
-    throw new Error('Wrong password', 400);
-  }
+	if (!isPasswordSame) {
+		throw new Error('Wrong password', 400)
+	}
 
-  return true
+	return true
 }
 
 function hashPassword(password) {
-  return bcrypt.hash(password, 10);
+	return bcrypt.hash(password, 10)
 }
 
-function generateTokenPair(encodeData = {}) {
-  const access_token = jwt.sign(encodeData, ACCESS_TOKEN_SECRET, {expiresIn: '10d'});
+function generateToken(encodeData = {}) {
+	const access_token = jwt.sign(encodeData, ACCESS_TOKEN_SECRET, {expiresIn: '10d'})
 
-  return {
-    access_token,
-  }
+	return {
+		access_token,
+	}
 }
 
 
 module.exports = {
-  comparePasswords,
-  hashPassword,
-  generateTokenPair,
+	comparePasswords,
+	hashPassword,
+	generateToken,
 }

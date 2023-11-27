@@ -1,21 +1,19 @@
-const {generateTokenPair, comparePasswords} = require('./auth.service')
-login = async (req, res, next) => {
-  try {
-    const {user, body: {password}} = req;
+const {generateToken, comparePasswords} = require('./auth.service')
+const login = async (req, res, next) => {
+	try {
+		const {user, body: {password}} = req
 
-   const truth=  await comparePasswords(password, user.password)
-    console.log(user)
+		await comparePasswords(password, user.password)
 
-
-    const accessToken = generateTokenPair({userId: user.id});
+		const accessToken = generateToken({userId: user.id})
 
 
-    res.json({
-      ...accessToken,
-      user
-    });
-  } catch (e) {
-    next(e)
-  }
+		res.json({
+			...accessToken,
+			user
+		})
+	} catch (e) {
+		next(e)
+	}
 }
-module.exports=login
+module.exports = login
