@@ -7,6 +7,8 @@
     "start:dev": "nodemon app.js",
     "start": "node app.js",
     "lint": "eslint . --ext .js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "lint:fix": "eslint . --ext .js --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -36,6 +38,7 @@
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.54.0"
+    "eslint": "^8.54.0",
+    "gh-pages": "^6.1.0"
   }
 }
