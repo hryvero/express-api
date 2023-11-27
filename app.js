@@ -1,6 +1,7 @@
 const express = require('express')
 const http = require('http')
 const socketIO = require('socket.io')
+const swagger = require('swagger-ui-express');
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -8,6 +9,7 @@ dotenv.config()
 const authRouter = require('./auth/auth.router')
 const userRouter = require('./user/user.router')
 const sequalize = require('./db/db.config')
+const swaggerJson = require('./swagger.json')
 
 
 const PORT = process.env.PORT || 3000
@@ -26,7 +28,6 @@ io.on('connection', (socket) => {
 	})
 })
 
-// global.io = io
 
 sequalize.authenticate().then(() => {
 	console.log('Database and table created!')
@@ -40,6 +41,7 @@ app.use('/users', (req, res, next) => {
 }, userRouter)
 
 app.use('/login', authRouter)
+app.use('/docs', swagger.serve, swagger.setup(swaggerJson));
 
 
 server.listen(PORT, async () => {

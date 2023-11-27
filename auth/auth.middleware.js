@@ -5,7 +5,7 @@ function isLoginDataValid(req, res, next) {
 		const {value, error} = loginSchema.validate(req.body)
 
 		if (error) {
-			throw new Error(error.details[0].message)
+			throw new Error(error.message)
 		}
 
 		req.body = value
