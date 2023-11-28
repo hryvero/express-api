@@ -1,12 +1,14 @@
 const {Sequelize} = require('sequelize')
+const dotenv= require('dotenv')
+dotenv.config()
 
 const sequelize = new Sequelize({
 	dialect: 'postgres',
-	database: 'incora',
-	host: 'localhost',
-	port: '5432',
-	username: 'postgres',
-	password: 'user',
+	database: process.env.DB_NAME || 'incora',
+	host: process.env.DB_HOST || 'localhost',
+	port: process.env.DB_PORT || '5432',
+	username: process.env.DB_USERNAME || 'postgres',
+	password: process.env.DB_PASSWORD || 'user',
 	pool: {
 		max: 5,
 		min: 0,
