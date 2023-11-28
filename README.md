@@ -11,11 +11,8 @@ This repository contains an Express API . It is designed to authenticate users.
     - [Installation](#installation)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
-- [Configuration](#configuration)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+- [Testing](#test)
+
 
 ## Getting Started
 
@@ -48,7 +45,7 @@ Copy code
 
 Your API will be accessible at http://localhost:3000 (or another port if configured differently).
 
-API Endpoints
+### API Endpoints
 Document your API endpoints, request/response formats, and any other relevant information. For example:
 
 
